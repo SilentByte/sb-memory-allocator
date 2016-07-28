@@ -26,7 +26,7 @@ cmake_minimum_required(VERSION 3.5)
 
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
-add_executable(sb_memory_run_general_tests tmp_test.cpp)
+add_executable(sb_memory_run_general_tests sb_data_test.cpp)
 
 target_link_libraries(sb_memory_run_general_tests gtest gtest_main)
 target_link_libraries(sb_memory_run_general_tests sb_memory)

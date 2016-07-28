@@ -27,7 +27,7 @@ project(sb_memory)
 
 add_definitions(-std=c++11)
 
-set(HEADER_FILES)
+set(HEADER_FILES include/sb/data.hpp)
 
 add_library(sb_memory STATIC ${HEADER_FILES})
 set_target_properties(sb_memory PROPERTIES LINKER_LANGUAGE CXX)

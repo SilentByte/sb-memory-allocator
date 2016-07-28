@@ -3,6 +3,7 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/sb_memory/include/sb/data.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/sb_memory/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/sb_memory_tests/lib/gtest-1.7.0/src/gtest_main.cc" isTestSource="false" />
@@ -10,7 +11,7 @@
       <sourceFolder url="file://$MODULE_DIR$/sb_memory_tests/lib/gtest-1.7.0/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/sb_memory_tests/lib/gtest-1.7.0/cmake/internal_utils.cmake" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/sb_memory_tests/general_tests/CMakeLists.txt" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/sb_memory_tests/general_tests/tmp_test.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/sb_memory_tests/general_tests/sb_data_test.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/sb_memory_tests/CMakeLists.txt" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
