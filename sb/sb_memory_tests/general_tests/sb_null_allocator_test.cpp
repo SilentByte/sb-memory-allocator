@@ -1,4 +1,3 @@
-#if ($HEADER_COMMENTS)
 ////
 //// MIT License
 ////
@@ -22,5 +21,43 @@
 //// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //// SOFTWARE.
 ////
-#end
 
+#include <sb/null_allocator.hpp>
+#include <gtest/gtest.h>
+
+TEST(SBNullAllocatorTest, Allocate)
+{
+	sb::null_allocator na;
+
+	auto d = na.allocate(1024);
+
+	EXPECT_EQ(d.ptr(), nullptr);
+	EXPECT_EQ(d.size(), 0);
+}
+
+TEST(SBNullAllocatorTest, Deallocate)
+{
+	sb::null_allocator na;
+
+	auto d = na.allocate(0);
+
+	EXPECT_EQ(d.ptr(), nullptr);
+	EXPECT_EQ(d.size(), 0);
+
+	na.deallocate(d);
+
+	EXPECT_EQ(d.ptr(), nullptr);
+	EXPECT_EQ(d.size(), 0);
+}
+
+TEST(SBNullAllocatorTest, Owns)
+{
+	sb::null_allocator na;
+
+	auto d = na.allocate(0);
+
+	EXPECT_TRUE(na.owns(d));
+	EXPECT_TRUE(na.owns(sb::data{}));
+
+	na.deallocate(d);
+}

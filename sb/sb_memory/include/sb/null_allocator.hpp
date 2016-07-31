@@ -1,4 +1,3 @@
-#if ($HEADER_COMMENTS)
 ////
 //// MIT License
 ////
@@ -22,5 +21,35 @@
 //// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //// SOFTWARE.
 ////
-#end
 
+#ifndef SB_MEMORY_NULL_ALLOCATOR_HPP
+#	define SB_MEMORY_NULL_ALLOCATOR_HPP
+
+#include <sb/data.hpp>
+
+#include <cassert>
+#include <cstddef>
+
+namespace sb
+{
+	class null_allocator
+	{
+		public:
+			data allocate(std::size_t size) const
+			{
+				return {nullptr, 0};
+			}
+
+			void deallocate(data d) const
+			{
+				assert(d.null());
+			}
+
+			bool owns(const data& d) const
+			{
+				return d.null();
+			}
+	};
+}
+
+#endif

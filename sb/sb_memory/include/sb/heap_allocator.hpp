@@ -1,4 +1,3 @@
-#if ($HEADER_COMMENTS)
 ////
 //// MIT License
 ////
@@ -22,5 +21,40 @@
 //// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //// SOFTWARE.
 ////
-#end
 
+#ifndef SB_MEMORY_HEAP_ALLOCATOR_HPP
+#	define SB_MEMORY_HEAP_ALLOCATOR_HPP
+
+#include <sb/data.hpp>
+#include <cstdlib>
+#include <cstddef>
+
+namespace sb
+{
+	class heap_allocator
+	{
+		public:
+			data allocate(std::size_t size)
+			{
+				if(size == 0)
+					return {};
+
+				void* ptr = malloc(size);
+				if(ptr == nullptr)
+					return {};
+
+				return {ptr, size};
+			}
+
+			void deallocate(data& d)
+			{
+				if(d)
+				{
+					free(d.ptr());
+					d.clear();
+				}
+			}
+	};
+}
+
+#endif

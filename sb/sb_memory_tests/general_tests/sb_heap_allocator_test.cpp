@@ -1,4 +1,3 @@
-#if ($HEADER_COMMENTS)
 ////
 //// MIT License
 ////
@@ -22,5 +21,49 @@
 //// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //// SOFTWARE.
 ////
-#end
 
+#include <sb/data.hpp>
+#include <sb/heap_allocator.hpp>
+#include <gtest/gtest.h>
+
+TEST(SBHeapAllocatorTest, Allocate)
+{
+	std::size_t size = 1024;
+	sb::heap_allocator ha;
+
+	auto d = ha.allocate(size);
+
+	EXPECT_NE(d.ptr(), nullptr);
+	EXPECT_EQ(d.size(), size);
+
+	ha.deallocate(d);
+}
+
+TEST(SBHeapAllocatorTest, AllocateNull)
+{
+	std::size_t size = 0;
+	sb::heap_allocator ha;
+
+	auto d = ha.allocate(size);
+
+	EXPECT_EQ(d.ptr(), nullptr);
+	EXPECT_EQ(d.size(), 0);
+
+	ha.deallocate(d);
+}
+
+TEST(SBHeapAllocatorTest, Deallocate)
+{
+	std::size_t size = 1024;
+	sb::heap_allocator ha;
+
+	auto d = ha.allocate(size);
+
+	EXPECT_NE(d.ptr(), nullptr);
+	EXPECT_EQ(d.size(), size);
+
+	ha.deallocate(d);
+
+	EXPECT_EQ(d.ptr(), nullptr);
+	EXPECT_EQ(d.size(), 0);
+}

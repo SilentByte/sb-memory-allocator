@@ -3,11 +3,9 @@
 #[[#	define]]# ${INCLUDE_GUARD}
 
 namespace sb {
-namespace memory {
 class ${NAME} {
 
 };
-}
 }
 
 #[[#endif]]#
