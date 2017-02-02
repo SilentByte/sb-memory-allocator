@@ -22,7 +22,7 @@
 ## SOFTWARE.
 ##
 
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 2.8.7)
 
 project(sb_memory_tests)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/tests)

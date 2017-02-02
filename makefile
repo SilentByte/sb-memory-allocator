@@ -13,8 +13,7 @@ all:
 clean:
 	rm -rf $(SB_BUILD_DIR)
 
-.PHONY: test tests
-test: tests
-tests: all
+.PHONY: test
+test:
 	$(foreach test,$(SB_TEST_RUNNABLES),$(test))
 
