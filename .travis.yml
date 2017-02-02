@@ -1,0 +1,13 @@
+#
+# Travis CI Configuration
+#
+
+language: cpp
+
+compiler:
+  - clang
+  - gcc
+
+script:
+  - make tests
+
