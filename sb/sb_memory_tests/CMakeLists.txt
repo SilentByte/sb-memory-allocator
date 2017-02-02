@@ -25,6 +25,7 @@
 cmake_minimum_required(VERSION 3.5)
 
 project(sb_memory_tests)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/tests)
 
 add_subdirectory(lib/gtest-1.7.0)
 add_subdirectory(general_tests)
