@@ -28,9 +28,9 @@ project(sb_memory)
 add_definitions(-std=c++11)
 
 set(HEADER_FILES
-	include/sb/data.hpp
-	include/sb/null_allocator.hpp
-	include/sb/heap_allocator.hpp)
+        include/sb/data.hpp
+        include/sb/null_allocator.hpp
+        include/sb/heap_allocator.hpp)
 
 add_library(sb_memory STATIC ${HEADER_FILES})
 set_target_properties(sb_memory PROPERTIES LINKER_LANGUAGE CXX)

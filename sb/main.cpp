@@ -26,6 +26,6 @@
 
 int main()
 {
-	std::cout << "Silent Byte Memory Allocator.";
-	return 0;
+    std::cout << "Silent Byte Memory Allocator.";
+    return 0;
 }

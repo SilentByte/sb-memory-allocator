@@ -31,30 +31,30 @@
 
 namespace sb
 {
-	class heap_allocator
-	{
-		public:
-			data allocate(std::size_t size)
-			{
-				if(size == 0)
-					return {};
+    class heap_allocator
+    {
+        public:
+            data allocate(std::size_t size)
+            {
+                if(size == 0)
+                    return {};
 
-				void* ptr = malloc(size);
-				if(ptr == nullptr)
-					return {};
+                void* ptr = malloc(size);
+                if(ptr == nullptr)
+                    return {};
 
-				return {ptr, size};
-			}
+                return {ptr, size};
+            }
 
-			void deallocate(data& d)
-			{
-				if(d)
-				{
-					free(d.ptr());
-					d.clear();
-				}
-			}
-	};
+            void deallocate(data& d)
+            {
+                if(d)
+                {
+                    free(d.ptr());
+                    d.clear();
+                }
+            }
+    };
 }
 
 #endif

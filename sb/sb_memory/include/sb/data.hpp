@@ -30,91 +30,91 @@
 
 namespace sb
 {
-	class data
-	{
-		private:
-			void* _ptr;
-			std::size_t _size;
+    class data
+    {
+        private:
+            void* _ptr;
+            std::size_t _size;
 
-		public:
-			data() noexcept
-				: _ptr {nullptr}, _size {0}
-			{
-				//
-			}
+        public:
+            data() noexcept
+                : _ptr {nullptr}, _size {0}
+            {
+                //
+            }
 
-			data(void* ptr, std::size_t size) noexcept
-				: _ptr {ptr}, _size {size}
-			{
-				//
-			}
+            data(void* ptr, std::size_t size) noexcept
+                : _ptr {ptr}, _size {size}
+            {
+                //
+            }
 
-			data(const data& d) noexcept
-				: _ptr {d._ptr}, _size {d._size}
-			{
-				//
-			}
+            data(const data& d) noexcept
+                : _ptr {d._ptr}, _size {d._size}
+            {
+                //
+            }
 
-			data(data&& d) noexcept
-			{
-				*this = std::move(d);
-			}
+            data(data&& d) noexcept
+            {
+                *this = std::move(d);
+            }
 
-		public:
-			void* ptr() const noexcept
-			{
-				return this->_ptr;
-			}
+        public:
+            void* ptr() const noexcept
+            {
+                return this->_ptr;
+            }
 
-			std::size_t size() const noexcept
-			{
-				return this->_size;
-			}
+            std::size_t size() const noexcept
+            {
+                return this->_size;
+            }
 
-			bool valid() const noexcept
-			{
-				return this->_ptr != nullptr;
-			}
+            bool valid() const noexcept
+            {
+                return this->_ptr != nullptr;
+            }
 
-			bool null() const noexcept
-			{
-				return this->_ptr == nullptr;
-			}
+            bool null() const noexcept
+            {
+                return this->_ptr == nullptr;
+            }
 
-			void clear() noexcept
-			{
-				this->_ptr = nullptr;
-				this->_size = 0;
-			}
+            void clear() noexcept
+            {
+                this->_ptr = nullptr;
+                this->_size = 0;
+            }
 
-		public:
-			data& operator=(const data& d) = default;
+        public:
+            data& operator=(const data& d) = default;
 
-			data& operator=(data&& d)
-			{
-				this->_ptr = d._ptr;
-				this->_size = d._size;
+            data& operator=(data&& d)
+            {
+                this->_ptr = d._ptr;
+                this->_size = d._size;
 
-				d.clear();
-				return *this;
-			}
+                d.clear();
+                return *this;
+            }
 
-			bool operator==(const data& rhs) const
-			{
-				return this->_ptr == rhs._ptr
-					&& this->_size == rhs._size;
-			}
+            bool operator==(const data& rhs) const
+            {
+                return this->_ptr == rhs._ptr
+                       && this->_size == rhs._size;
+            }
 
-			bool operator!=(const data& rhs) const
-			{
-				return !(*this == rhs);
-			}
+            bool operator!=(const data& rhs) const
+            {
+                return !(*this == rhs);
+            }
 
-			explicit operator bool() const
-			{
-				return this->valid();
-			}
-	};
+            explicit operator bool() const
+            {
+                return this->valid();
+            }
+    };
 }
 
 #endif

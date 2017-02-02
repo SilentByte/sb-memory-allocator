@@ -32,24 +32,24 @@
 
 namespace sb
 {
-	class null_allocator
-	{
-		public:
-			data allocate(std::size_t size) const
-			{
-				return {nullptr, 0};
-			}
+    class null_allocator
+    {
+        public:
+            data allocate(std::size_t size) const
+            {
+                return {nullptr, 0};
+            }
 
-			void deallocate(data d) const
-			{
-				assert(d.null());
-			}
+            void deallocate(data d) const
+            {
+                assert(d.null());
+            }
 
-			bool owns(const data& d) const
-			{
-				return d.null();
-			}
-	};
+            bool owns(const data& d) const
+            {
+                return d.null();
+            }
+    };
 }
 
 #endif
