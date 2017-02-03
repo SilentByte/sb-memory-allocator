@@ -30,7 +30,8 @@ add_executable(sb_memory_run_general_tests
         sb_data_test.cpp
         sb_heap_allocator_test.cpp
         sb_null_allocator_test.cpp
-        sb_stack_allocator_test.cpp)
+        sb_stack_allocator_test.cpp
+        sb_throw_allocator_test.cpp)
 
 target_link_libraries(sb_memory_run_general_tests gtest gtest_main)
 target_link_libraries(sb_memory_run_general_tests sb_memory)
