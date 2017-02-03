@@ -28,6 +28,7 @@ project(sb_memory)
 add_definitions(-std=c++11)
 
 set(HEADER_FILES
+        include/sb/fallback_allocator.hpp
         include/sb/heap_allocator.hpp
         include/sb/mem.hpp
         include/sb/memalign.hpp
