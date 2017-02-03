@@ -22,42 +22,14 @@
 //// SOFTWARE.
 ////
 
-#include <sb/null_allocator.hpp>
-#include <gtest/gtest.h>
+#ifndef SB_MEMORY_DEFS_HPP
+#   define SB_MEMORY_DEFS_HPP
 
-TEST(SBNullAllocatorTest, Allocate)
+#include <cstddef>
+
+namespace sb
 {
-    sb::null_allocator na;
-
-    auto d = na.allocate(1024);
-
-    EXPECT_EQ(d.ptr(), nullptr);
-    EXPECT_EQ(d.size(), 0);
+    constexpr std::size_t default_alignment = sizeof(std::size_t);
 }
 
-TEST(SBNullAllocatorTest, Deallocate)
-{
-    sb::null_allocator na;
-
-    auto d = na.allocate(0);
-
-    EXPECT_EQ(d.ptr(), nullptr);
-    EXPECT_EQ(d.size(), 0);
-
-    na.deallocate(d);
-
-    EXPECT_EQ(d.ptr(), nullptr);
-    EXPECT_EQ(d.size(), 0);
-}
-
-TEST(SBNullAllocatorTest, Owns)
-{
-    sb::null_allocator na;
-
-    auto d = na.allocate(0);
-
-    EXPECT_TRUE(na.owns(d));
-    EXPECT_TRUE(na.owns(sb::mem{}));
-
-    na.deallocate(d);
-}
+#endif

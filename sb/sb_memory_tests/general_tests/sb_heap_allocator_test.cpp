@@ -23,6 +23,7 @@
 ////
 
 #include <sb/heap_allocator.hpp>
+
 #include <algorithm>
 #include <gtest/gtest.h>
 
