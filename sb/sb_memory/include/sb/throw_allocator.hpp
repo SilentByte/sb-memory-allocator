@@ -31,7 +31,7 @@
 
 namespace sb
 {
-    template<typename Allocator>
+    template<typename Allocator, typename Exception = sb::allocation_exception>
     class throw_allocator : public Allocator
     {
         public:
@@ -42,7 +42,7 @@ namespace sb
                     return m;
                 }
 
-                throw sb::allocation_exception {size};
+                throw Exception {size};
             }
     };
 }

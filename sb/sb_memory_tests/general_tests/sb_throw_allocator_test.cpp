@@ -27,10 +27,25 @@
 #include <gtest/gtest.h>
 #include <sb/stack_allocator.hpp>
 
+class custom_exception
+{
+    public:
+        custom_exception(std::size_t size)
+        {
+            //
+        }
+};
+
 TEST(SBThrowAllocatorTest, AllocateThrow)
 {
     sb::throw_allocator<sb::stack_allocator<100>> a;
     EXPECT_THROW(a.allocate(200), sb::allocation_exception);
+}
+
+TEST(SBThrowAllocatorTest, AllocateThrowCustom)
+{
+    sb::throw_allocator<sb::stack_allocator<100>, custom_exception> a;
+    EXPECT_THROW(a.allocate(200), custom_exception);
 }
 
 TEST(SBThrowAllocatorTest, AllocateNoThrow)
