@@ -301,6 +301,6 @@ install-exec-local:
 	echo "'make install' is dangerous and not supported. Instead, see README for how to integrate Google Test into your build system."
 	false
 
-install-data-local:
+install-mem-local:
 	echo "'make install' is dangerous and not supported. Instead, see README for how to integrate Google Test into your build system."
 	false

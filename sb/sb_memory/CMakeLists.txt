@@ -28,7 +28,7 @@ project(sb_memory)
 add_definitions(-std=c++11)
 
 set(HEADER_FILES
-        include/sb/data.hpp
+        include/sb/mem.hpp
         include/sb/null_allocator.hpp
         include/sb/heap_allocator.hpp)
 

@@ -22,7 +22,7 @@
 //// SOFTWARE.
 ////
 
-#include <sb/data.hpp>
+#include <sb/mem.hpp>
 #include <sb/heap_allocator.hpp>
 #include <gtest/gtest.h>
 

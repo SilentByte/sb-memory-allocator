@@ -30,34 +30,34 @@
 
 namespace sb
 {
-    class data
+    class mem
     {
         private:
             void* _ptr;
             std::size_t _size;
 
         public:
-            data() noexcept
+            mem() noexcept
                 : _ptr {nullptr}, _size {0}
             {
                 //
             }
 
-            data(void* ptr, std::size_t size) noexcept
+            mem(void* ptr, std::size_t size) noexcept
                 : _ptr {ptr}, _size {size}
             {
                 //
             }
 
-            data(const data& d) noexcept
-                : _ptr {d._ptr}, _size {d._size}
+            mem(const mem& m) noexcept
+                : _ptr {m._ptr}, _size {m._size}
             {
                 //
             }
 
-            data(data&& d) noexcept
+            mem(mem&& m) noexcept
             {
-                *this = std::move(d);
+                *this = std::move(m);
             }
 
         public:
@@ -88,24 +88,24 @@ namespace sb
             }
 
         public:
-            data& operator=(const data& d) = default;
+            mem& operator=(const mem& m) = default;
 
-            data& operator=(data&& d)
+            mem& operator=(mem&& m)
             {
-                this->_ptr = d._ptr;
-                this->_size = d._size;
+                this->_ptr = m._ptr;
+                this->_size = m._size;
 
-                d.clear();
+                m.clear();
                 return *this;
             }
 
-            bool operator==(const data& rhs) const
+            bool operator==(const mem& rhs) const
             {
                 return this->_ptr == rhs._ptr
                        && this->_size == rhs._size;
             }
 
-            bool operator!=(const data& rhs) const
+            bool operator!=(const mem& rhs) const
             {
                 return !(*this == rhs);
             }

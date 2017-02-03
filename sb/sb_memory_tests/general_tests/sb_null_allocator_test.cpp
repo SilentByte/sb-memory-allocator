@@ -57,7 +57,7 @@ TEST(SBNullAllocatorTest, Owns)
     auto d = na.allocate(0);
 
     EXPECT_TRUE(na.owns(d));
-    EXPECT_TRUE(na.owns(sb::data{}));
+    EXPECT_TRUE(na.owns(sb::mem{}));
 
     na.deallocate(d);
 }

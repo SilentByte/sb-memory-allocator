@@ -25,7 +25,7 @@
 #ifndef SB_MEMORY_NULL_ALLOCATOR_HPP
 #	define SB_MEMORY_NULL_ALLOCATOR_HPP
 
-#include <sb/data.hpp>
+#include <sb/mem.hpp>
 
 #include <cassert>
 #include <cstddef>
@@ -35,19 +35,19 @@ namespace sb
     class null_allocator
     {
         public:
-            data allocate(std::size_t size) const
+            mem allocate(std::size_t size) const
             {
                 return {nullptr, 0};
             }
 
-            void deallocate(data d) const
+            void deallocate(mem m) const
             {
-                assert(d.null());
+                assert(m.null());
             }
 
-            bool owns(const data& d) const
+            bool owns(const mem& m) const
             {
-                return d.null();
+                return m.null();
             }
     };
 }

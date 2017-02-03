@@ -25,7 +25,7 @@
 #ifndef SB_MEMORY_HEAP_ALLOCATOR_HPP
 #	define SB_MEMORY_HEAP_ALLOCATOR_HPP
 
-#include <sb/data.hpp>
+#include <sb/mem.hpp>
 #include <cstdlib>
 #include <cstddef>
 
@@ -34,7 +34,7 @@ namespace sb
     class heap_allocator
     {
         public:
-            data allocate(std::size_t size)
+            mem allocate(std::size_t size)
             {
                 if(size == 0) {
                     return {};
@@ -48,11 +48,11 @@ namespace sb
                 return {ptr, size};
             }
 
-            void deallocate(data& d)
+            void deallocate(mem& m)
             {
-                if(d) {
-                    free(d.ptr());
-                    d.clear();
+                if(m) {
+                    free(m.ptr());
+                    m.clear();
                 }
             }
     };
