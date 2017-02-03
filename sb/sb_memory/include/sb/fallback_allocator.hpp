@@ -34,7 +34,7 @@ namespace sb
     class fallback_allocator : private PrimaryAllocator, private SecondaryAllocator
     {
         public:
-            mem allocate(std::size_t size) noexcept
+            mem allocate(std::size_t size)
             {
                 mem m = Primary::allocate(size);
                 if(m.valid())
@@ -43,7 +43,7 @@ namespace sb
                     return Secondary::allocate(size);
             }
 
-            void deallocate(const mem& m) noexcept
+            void deallocate(const mem& m)
             {
                 if(Primary::owns(m))
                     Primary::deallocate(m);
@@ -57,7 +57,7 @@ namespace sb
                 Secondary::collect();
             }
 
-            bool owns(const mem& m) const noexcept
+            bool owns(const mem& m) const
             {
                 return Primary::owns(m) || Secondary::owns(m);
             }
