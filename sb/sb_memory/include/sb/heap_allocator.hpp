@@ -36,20 +36,21 @@ namespace sb
         public:
             data allocate(std::size_t size)
             {
-                if(size == 0)
+                if(size == 0) {
                     return {};
+                }
 
                 void* ptr = malloc(size);
-                if(ptr == nullptr)
+                if(ptr == nullptr) {
                     return {};
+                }
 
                 return {ptr, size};
             }
 
             void deallocate(data& d)
             {
-                if(d)
-                {
+                if(d) {
                     free(d.ptr());
                     d.clear();
                 }
