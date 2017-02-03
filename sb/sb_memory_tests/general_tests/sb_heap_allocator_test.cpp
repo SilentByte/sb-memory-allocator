@@ -22,8 +22,8 @@
 //// SOFTWARE.
 ////
 
-#include <sb/mem.hpp>
 #include <sb/heap_allocator.hpp>
+#include <algorithm>
 #include <gtest/gtest.h>
 
 TEST(SBHeapAllocatorTest, Allocate)
@@ -37,6 +37,21 @@ TEST(SBHeapAllocatorTest, Allocate)
     EXPECT_EQ(m.size(), size);
 
     ha.deallocate(m);
+}
+
+TEST(SBHeapAllocatorTest, AllocateMultiple)
+{
+    std::vector<std::size_t> v {1, 2, 3, 4, 5, 8, 13, 16, 20, 24, 1000, 2000, 10000};
+    sb::heap_allocator ha;
+
+    std::for_each(v.begin(), v.end(), [&ha](const std::size_t& size) {
+        auto m = ha.allocate(size);
+
+        EXPECT_NE(m.ptr(), nullptr);
+        EXPECT_EQ(m.size(), size);
+
+        ha.deallocate(m);
+    });
 }
 
 TEST(SBHeapAllocatorTest, AllocateNull)
