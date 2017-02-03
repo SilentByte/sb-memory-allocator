@@ -29,9 +29,9 @@
 #include <cstdlib>
 #include <cstddef>
 
-#include <sb/align.hpp>
-#include <sb/defs.hpp>
 #include <sb/mem.hpp>
+#include <sb/memalign.hpp>
+#include <sb/memdefs.hpp>
 
 namespace sb
 {

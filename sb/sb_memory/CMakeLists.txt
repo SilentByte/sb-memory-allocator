@@ -28,10 +28,10 @@ project(sb_memory)
 add_definitions(-std=c++11)
 
 set(HEADER_FILES
-        include/sb/align.hpp
-        include/sb/defs.hpp
         include/sb/heap_allocator.hpp
         include/sb/mem.hpp
+        include/sb/memalign.hpp
+        include/sb/memdefs.hpp
         include/sb/null_allocator.hpp
         include/sb/singleton_allocator.hpp
         include/sb/stack_allocator.hpp)
