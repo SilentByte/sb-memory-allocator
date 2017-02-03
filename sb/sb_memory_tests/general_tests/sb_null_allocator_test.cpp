@@ -29,35 +29,35 @@ TEST(SBNullAllocatorTest, Allocate)
 {
     sb::null_allocator na;
 
-    auto d = na.allocate(1024);
+    auto m = na.allocate(1024);
 
-    EXPECT_EQ(d.ptr(), nullptr);
-    EXPECT_EQ(d.size(), 0);
+    EXPECT_EQ(m.ptr(), nullptr);
+    EXPECT_EQ(m.size(), 0);
 }
 
 TEST(SBNullAllocatorTest, Deallocate)
 {
     sb::null_allocator na;
 
-    auto d = na.allocate(0);
+    auto m = na.allocate(0);
 
-    EXPECT_EQ(d.ptr(), nullptr);
-    EXPECT_EQ(d.size(), 0);
+    EXPECT_EQ(m.ptr(), nullptr);
+    EXPECT_EQ(m.size(), 0);
 
-    na.deallocate(d);
+    na.deallocate(m);
 
-    EXPECT_EQ(d.ptr(), nullptr);
-    EXPECT_EQ(d.size(), 0);
+    EXPECT_EQ(m.ptr(), nullptr);
+    EXPECT_EQ(m.size(), 0);
 }
 
 TEST(SBNullAllocatorTest, Owns)
 {
     sb::null_allocator na;
 
-    auto d = na.allocate(0);
+    auto m = na.allocate(0);
 
-    EXPECT_TRUE(na.owns(d));
+    EXPECT_TRUE(na.owns(m));
     EXPECT_TRUE(na.owns(sb::mem{}));
 
-    na.deallocate(d);
+    na.deallocate(m);
 }

@@ -31,12 +31,12 @@ TEST(SBHeapAllocatorTest, Allocate)
     std::size_t size = 1024;
     sb::heap_allocator ha;
 
-    auto d = ha.allocate(size);
+    auto m = ha.allocate(size);
 
-    EXPECT_NE(d.ptr(), nullptr);
-    EXPECT_EQ(d.size(), size);
+    EXPECT_NE(m.ptr(), nullptr);
+    EXPECT_EQ(m.size(), size);
 
-    ha.deallocate(d);
+    ha.deallocate(m);
 }
 
 TEST(SBHeapAllocatorTest, AllocateNull)
@@ -44,12 +44,12 @@ TEST(SBHeapAllocatorTest, AllocateNull)
     std::size_t size = 0;
     sb::heap_allocator ha;
 
-    auto d = ha.allocate(size);
+    auto m = ha.allocate(size);
 
-    EXPECT_EQ(d.ptr(), nullptr);
-    EXPECT_EQ(d.size(), 0);
+    EXPECT_EQ(m.ptr(), nullptr);
+    EXPECT_EQ(m.size(), 0);
 
-    ha.deallocate(d);
+    ha.deallocate(m);
 }
 
 TEST(SBHeapAllocatorTest, Deallocate)
@@ -57,13 +57,13 @@ TEST(SBHeapAllocatorTest, Deallocate)
     std::size_t size = 1024;
     sb::heap_allocator ha;
 
-    auto d = ha.allocate(size);
+    auto m = ha.allocate(size);
 
-    EXPECT_NE(d.ptr(), nullptr);
-    EXPECT_EQ(d.size(), size);
+    EXPECT_NE(m.ptr(), nullptr);
+    EXPECT_EQ(m.size(), size);
 
-    ha.deallocate(d);
+    ha.deallocate(m);
 
-    EXPECT_EQ(d.ptr(), nullptr);
-    EXPECT_EQ(d.size(), 0);
+    EXPECT_EQ(m.ptr(), nullptr);
+    EXPECT_EQ(m.size(), 0);
 }
