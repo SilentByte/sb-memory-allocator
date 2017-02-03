@@ -25,10 +25,10 @@
 #ifndef SB_MEMORY_NULL_ALLOCATOR_HPP
 #	define SB_MEMORY_NULL_ALLOCATOR_HPP
 
-#include <sb/mem.hpp>
-
 #include <cassert>
 #include <cstddef>
+
+#include <sb/mem.hpp>
 
 namespace sb
 {

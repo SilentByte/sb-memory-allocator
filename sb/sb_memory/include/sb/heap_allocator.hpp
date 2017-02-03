@@ -25,9 +25,10 @@
 #ifndef SB_MEMORY_HEAP_ALLOCATOR_HPP
 #	define SB_MEMORY_HEAP_ALLOCATOR_HPP
 
-#include <sb/mem.hpp>
 #include <cstdlib>
 #include <cstddef>
+
+#include <sb/mem.hpp>
 
 namespace sb
 {
