@@ -34,7 +34,7 @@ namespace sb
     class heap_allocator
     {
         public:
-            mem allocate(std::size_t size)
+            mem allocate(std::size_t size) const noexcept
             {
                 if(size == 0) {
                     return {};
@@ -48,7 +48,7 @@ namespace sb
                 return {ptr, size};
             }
 
-            void deallocate(mem& m)
+            void deallocate(mem& m) const noexcept
             {
                 if(m) {
                     free(m.ptr());

@@ -35,17 +35,17 @@ namespace sb
     class null_allocator
     {
         public:
-            mem allocate(std::size_t size) const
+            mem allocate(std::size_t size) const noexcept
             {
                 return {nullptr, 0};
             }
 
-            void deallocate(mem m) const
+            void deallocate(mem m) const noexcept
             {
                 assert(m.null());
             }
 
-            bool owns(const mem& m) const
+            bool owns(const mem& m) const noexcept
             {
                 return m.null();
             }

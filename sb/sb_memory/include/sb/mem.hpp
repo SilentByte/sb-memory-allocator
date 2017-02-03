@@ -90,7 +90,7 @@ namespace sb
         public:
             mem& operator=(const mem& m) = default;
 
-            mem& operator=(mem&& m)
+            mem& operator=(mem&& m) noexcept
             {
                 this->_ptr = m._ptr;
                 this->_size = m._size;
@@ -99,18 +99,18 @@ namespace sb
                 return *this;
             }
 
-            bool operator==(const mem& rhs) const
+            bool operator==(const mem& rhs) const noexcept
             {
                 return this->_ptr == rhs._ptr
                        && this->_size == rhs._size;
             }
 
-            bool operator!=(const mem& rhs) const
+            bool operator!=(const mem& rhs) const noexcept
             {
                 return !(*this == rhs);
             }
 
-            explicit operator bool() const
+            explicit operator bool() const noexcept
             {
                 return this->valid();
             }
