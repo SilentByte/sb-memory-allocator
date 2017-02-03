@@ -32,6 +32,7 @@ set(HEADER_FILES
         include/sb/mem.hpp
         include/sb/memalign.hpp
         include/sb/memdefs.hpp
+        include/sb/memout.hpp
         include/sb/null_allocator.hpp
         include/sb/singleton_allocator.hpp
         include/sb/stack_allocator.hpp)
