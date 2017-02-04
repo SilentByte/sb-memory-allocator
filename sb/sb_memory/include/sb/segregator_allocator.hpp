@@ -36,18 +36,22 @@ namespace sb
         public:
             data allocate(memsize size)
             {
-                if(size <= threshold)
+                if(size <= threshold) {
                     return LowerAllocator::allocate(size);
-                else
+                }
+                else {
                     return UpperAllocator::allocate(size);
+                }
             }
 
             void deallocate(const data& d)
             {
-                if(d.size <= threshold)
+                if(d.size <= threshold) {
                     LowerAllocator::deallocate(d);
-                else
+                }
+                else {
                     UpperAllocator::deallocate(d);
+                }
             }
 
             void collect()

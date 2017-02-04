@@ -37,18 +37,22 @@ namespace sb
             mem allocate(memsize size)
             {
                 mem m = Primary::allocate(size);
-                if(m.valid())
+                if(m) {
                     return m;
-                else
+                }
+                else {
                     return Secondary::allocate(size);
+                }
             }
 
             void deallocate(const mem& m)
             {
-                if(Primary::owns(m))
+                if(Primary::owns(m)) {
                     Primary::deallocate(m);
-                else
+                }
+                else {
                     Secondary::deallocate(m);
+                }
             }
 
             void collect() noexcept
