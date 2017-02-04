@@ -29,13 +29,13 @@
 
 namespace sb
 {
-    template<typename T>
+    template<typename Allocator>
     class singleton_allocator
     {
         public:
-            static T& instance()
+            static Allocator& instance()
             {
-                static T allocator;
+                static Allocator allocator;
                 return allocator;
             }
     };
