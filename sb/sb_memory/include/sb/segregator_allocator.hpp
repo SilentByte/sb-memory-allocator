@@ -34,7 +34,7 @@ namespace sb
     class segregator_allocator : private LowerAllocator, private UpperAllocator
     {
         public:
-            data allocate(memsize size)
+            mem allocate(memsize size)
             {
                 if(size <= threshold) {
                     return LowerAllocator::allocate(size);
@@ -44,13 +44,13 @@ namespace sb
                 }
             }
 
-            void deallocate(const data& d)
+            void deallocate(const mem& m)
             {
-                if(d.size <= threshold) {
-                    LowerAllocator::deallocate(d);
+                if(m.size() <= threshold) {
+                    LowerAllocator::deallocate(m);
                 }
                 else {
-                    UpperAllocator::deallocate(d);
+                    UpperAllocator::deallocate(m);
                 }
             }
 
@@ -60,11 +60,11 @@ namespace sb
                 UpperAllocator::collect();
             }
 
-            bool owns(const data& d) const
+            bool owns(const mem& m) const
             {
-                return d.size <= threshold
-                       ? LowerAllocator::owns(d)
-                       : UpperAllocator::owns(d);
+                return m.size() <= threshold
+                       ? LowerAllocator::owns(m)
+                       : UpperAllocator::owns(m);
             }
     };
 }
