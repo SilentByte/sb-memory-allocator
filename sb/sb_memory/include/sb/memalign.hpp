@@ -26,10 +26,11 @@
 #	define SB_MEMORY_ALIGN_HPP
 
 #include <cstddef>
+#include <sb/memdefs.hpp>
 
 namespace sb
 {
-    inline constexpr std::size_t align(std::size_t alignment, std::size_t size)
+    inline constexpr memsize align(memsize alignment, memsize size)
     {
 //          // Extended Version for C++14.
 //          std::size_t mod = size % alignment;

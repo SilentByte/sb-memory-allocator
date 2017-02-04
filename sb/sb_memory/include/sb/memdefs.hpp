@@ -30,6 +30,8 @@
 
 namespace sb
 {
+    using memsize = std::size_t;
+
     using u8 = std::uint8_t;
     using u16 = std::uint16_t;
     using u32 = std::uint32_t;
@@ -40,7 +42,7 @@ namespace sb
     using i32 = std::int32_t;
     using i64 = std::int64_t;
 
-    constexpr std::size_t default_alignment = sizeof(std::size_t);
+    constexpr memsize default_alignment = sizeof(memsize);
 }
 
 #endif

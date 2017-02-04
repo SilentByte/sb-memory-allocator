@@ -36,7 +36,7 @@ TEST(SBDataTest, CTor)
 TEST(SBDataTest, CTorValue)
 {
     void* address = reinterpret_cast<void*>(123456789);
-    std::size_t size = 987654321;
+    sb::memsize size = 987654321;
 
     sb::mem m {address, size};
 
@@ -59,7 +59,7 @@ TEST(SBDataTest, Null)
 TEST(SBDataTest, Clear)
 {
     void* address = reinterpret_cast<void*>(123456789);
-    std::size_t size = 987654321;
+    sb::memsize size = 987654321;
 
     sb::mem m {address, size};
     m.clear();
@@ -71,7 +71,7 @@ TEST(SBDataTest, Clear)
 TEST(SBDataTest, BoolCompare)
 {
     void* address = reinterpret_cast<void*>(123456789);
-    std::size_t size = 987654321;
+    sb::memsize size = 987654321;
 
     sb::mem m1 {address, size};
     if(!m1)
@@ -85,7 +85,7 @@ TEST(SBDataTest, BoolCompare)
 TEST(SBDataTest, Equals)
 {
     void* address = reinterpret_cast<void*>(123456789);
-    std::size_t size = 987654321;
+    sb::memsize size = 987654321;
 
     sb::mem m1 {address, size};
     sb::mem m2 {address, size};
@@ -98,7 +98,7 @@ TEST(SBDataTest, Equals)
 TEST(SBDataTest, Empty)
 {
     void* address = reinterpret_cast<void*>(123456789);
-    std::size_t size = 987654321;
+    sb::memsize size = 987654321;
 
     sb::mem m1 {};
     sb::mem m2 {};

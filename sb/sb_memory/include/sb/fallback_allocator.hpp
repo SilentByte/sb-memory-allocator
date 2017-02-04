@@ -25,8 +25,8 @@
 #ifndef SB_MEMORY_FALLBACK_ALLOCATOR_HPP
 #	define SB_MEMORY_FALLBACK_ALLOCATOR_HPP
 
-#include <cstddef>
 #include <sb/mem.hpp>
+#include <sb/memdefs.hpp>
 
 namespace sb
 {
@@ -34,7 +34,7 @@ namespace sb
     class fallback_allocator : private PrimaryAllocator, private SecondaryAllocator
     {
         public:
-            mem allocate(std::size_t size)
+            mem allocate(memsize size)
             {
                 mem m = Primary::allocate(size);
                 if(m.valid())

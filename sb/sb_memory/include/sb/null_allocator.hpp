@@ -26,16 +26,15 @@
 #	define SB_MEMORY_NULL_ALLOCATOR_HPP
 
 #include <cassert>
-#include <cstddef>
-
 #include <sb/mem.hpp>
+#include <sb/memdefs.hpp>
 
 namespace sb
 {
     class null_allocator
     {
         public:
-            mem allocate(std::size_t size) const noexcept
+            mem allocate(memsize size) const noexcept
             {
                 return {nullptr, 0};
             }

@@ -25,8 +25,8 @@
 #ifndef SB_MEMORY_DATA_HPP
 #	define SB_MEMORY_DATA_HPP
 
-#include <cstddef>
 #include <utility>
+#include <sb/memdefs.hpp>
 
 namespace sb
 {
@@ -34,7 +34,7 @@ namespace sb
     {
         private:
             void* _ptr;
-            std::size_t _size;
+            memsize _size;
 
         public:
             mem() noexcept
@@ -43,7 +43,7 @@ namespace sb
                 //
             }
 
-            mem(void* ptr, std::size_t size) noexcept
+            mem(void* ptr, memsize size) noexcept
                 : _ptr {ptr}, _size {size}
             {
                 //
@@ -66,7 +66,7 @@ namespace sb
                 return this->_ptr;
             }
 
-            std::size_t size() const noexcept
+            memsize size() const noexcept
             {
                 return this->_size;
             }

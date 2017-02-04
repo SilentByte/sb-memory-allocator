@@ -29,7 +29,7 @@
 
 TEST(SBHeapAllocatorTest, Allocate)
 {
-    std::size_t size = 1024;
+    sb::memsize size = 1024;
     sb::heap_allocator ha;
 
     auto m = ha.allocate(size);
@@ -42,10 +42,10 @@ TEST(SBHeapAllocatorTest, Allocate)
 
 TEST(SBHeapAllocatorTest, AllocateMultiple)
 {
-    std::vector<std::size_t> v {1, 2, 3, 4, 5, 8, 13, 16, 20, 24, 1000, 2000, 10000};
+    std::vector<sb::memsize> v {1, 2, 3, 4, 5, 8, 13, 16, 20, 24, 1000, 2000, 10000};
     sb::heap_allocator ha;
 
-    std::for_each(v.begin(), v.end(), [&ha](const std::size_t& size) {
+    std::for_each(v.begin(), v.end(), [&ha](const sb::memsize& size) {
         auto m = ha.allocate(size);
 
         EXPECT_NE(m.ptr(), nullptr);
@@ -57,7 +57,7 @@ TEST(SBHeapAllocatorTest, AllocateMultiple)
 
 TEST(SBHeapAllocatorTest, AllocateNull)
 {
-    std::size_t size = 0;
+    sb::memsize size = 0;
     sb::heap_allocator ha;
 
     auto m = ha.allocate(size);
@@ -70,7 +70,7 @@ TEST(SBHeapAllocatorTest, AllocateNull)
 
 TEST(SBHeapAllocatorTest, Deallocate)
 {
-    std::size_t size = 1024;
+    sb::memsize size = 1024;
     sb::heap_allocator ha;
 
     auto m = ha.allocate(size);

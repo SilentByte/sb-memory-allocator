@@ -27,7 +27,6 @@
 
 #include <cassert>
 #include <cstdlib>
-#include <cstddef>
 
 #include <sb/mem.hpp>
 #include <sb/memalign.hpp>
@@ -35,7 +34,7 @@
 
 namespace sb
 {
-    template<std::size_t stack_size, std::size_t stack_alignment = sb::default_alignment>
+    template<memsize stack_size, memsize stack_alignment = sb::default_alignment>
     class stack_allocator
     {
         private:
@@ -43,8 +42,8 @@ namespace sb
             static_assert(stack_alignment > 0, "Alignment must be greater than zero.");
 
         public:
-            constexpr static std::size_t max_size = stack_size;
-            constexpr static std::size_t alignment = stack_alignment;
+            constexpr static memsize max_size = stack_size;
+            constexpr static memsize alignment = stack_alignment;
 
         private:
             alignas(stack_alignment) char _buffer[stack_size];
@@ -58,13 +57,13 @@ namespace sb
             }
 
         public:
-            mem allocate(std::size_t size) noexcept
+            mem allocate(memsize size) noexcept
             {
                 if(size == 0) {
                     return {};
                 }
 
-                std::size_t aligned = align(stack_alignment, size);
+                memsize aligned = align(stack_alignment, size);
 
                 // Check if stack memory is exhausted.
                 if(aligned + this->_ptr > this->_buffer + stack_size)
@@ -96,7 +95,7 @@ namespace sb
                 this->_ptr = this->_buffer;
             }
 
-            std::size_t available() const noexcept
+            memsize available() const noexcept
             {
                 return stack_size - (this->_ptr - this->_buffer);
             }

@@ -30,7 +30,7 @@
 class custom_exception
 {
     public:
-        custom_exception(std::size_t size)
+        custom_exception(sb::memsize size)
         {
             //
         }

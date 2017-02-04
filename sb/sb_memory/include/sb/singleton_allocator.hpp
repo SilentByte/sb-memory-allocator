@@ -25,7 +25,6 @@
 #ifndef SB_MEMORY_SINGLETON_ALLOCATOR_HPP
 #	define SB_MEMORY_SINGLETON_ALLOCATOR_HPP
 
-#include <cstddef>
 #include <sb/mem.hpp>
 
 namespace sb

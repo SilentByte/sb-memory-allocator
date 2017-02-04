@@ -25,9 +25,9 @@
 #ifndef SB_MEMORY_THROW_ALLOCATOR_HPP
 #	define SB_MEMORY_THROW_ALLOCATOR_HPP
 
-#include <cstddef>
 #include <sb/allocation_exception.hpp>
 #include <sb/mem.hpp>
+#include <sb/memdefs.hpp>
 
 namespace sb
 {
@@ -35,7 +35,7 @@ namespace sb
     class throw_allocator : public Allocator
     {
         public:
-            mem allocate(std::size_t size)
+            mem allocate(memsize size)
             {
                 mem m = Allocator::allocate(size);
                 if(m.valid()) {

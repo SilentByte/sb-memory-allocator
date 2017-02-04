@@ -25,17 +25,17 @@
 #ifndef SB_MEMORY_ALLOCATION_EXCEPTION_HPP
 #	define SB_MEMORY_ALLOCATION_EXCEPTION_HPP
 
-#include <cstddef>
 #include <stdexcept>
 #include <sstream>
 #include <string>
+#include <sb/memdefs.hpp>
 
 namespace sb
 {
     class allocation_exception : public std::runtime_error
     {
         private:
-            static std::string format_message(std::size_t size, const char* message)
+            static std::string format_message(memsize size, const char* message)
             {
                 std::ostringstream ss {""};
                 ss << "(" << size << ") "
@@ -45,7 +45,7 @@ namespace sb
             }
 
         public:
-            allocation_exception(std::size_t size, const char* message = nullptr)
+            allocation_exception(memsize size, const char* message = nullptr)
                 : std::runtime_error {format_message(size, message)}
             {
                 //

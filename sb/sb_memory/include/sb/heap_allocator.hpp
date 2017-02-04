@@ -26,16 +26,15 @@
 #	define SB_MEMORY_HEAP_ALLOCATOR_HPP
 
 #include <cstdlib>
-#include <cstddef>
-
 #include <sb/mem.hpp>
+#include <sb/memdefs.hpp>
 
 namespace sb
 {
     class heap_allocator
     {
         public:
-            mem allocate(std::size_t size) const noexcept
+            mem allocate(memsize size) const noexcept
             {
                 if(size == 0) {
                     return {};

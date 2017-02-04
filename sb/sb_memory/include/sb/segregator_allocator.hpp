@@ -25,16 +25,16 @@
 #ifndef SB_MEMORY_SEGREGATOR_ALLOCATOR_HPP
 #	define SB_MEMORY_SEGREGATOR_ALLOCATOR_HPP
 
-#include <cstddef>
 #include <sb/mem.hpp>
+#include <sb/memdefs.hpp>
 
 namespace sb
 {
-    template<std::size_t threshold, typename LowerAllocator, typename UpperAllocator>
+    template<memsize threshold, typename LowerAllocator, typename UpperAllocator>
     class segregator_allocator : private LowerAllocator, private UpperAllocator
     {
         public:
-            data allocate(std::size_t size)
+            data allocate(memsize size)
             {
                 if(size <= threshold)
                     return LowerAllocator::allocate(size);
