@@ -36,6 +36,7 @@ set(HEADER_FILES
         include/sb/memdefs.hpp
         include/sb/memout.hpp
         include/sb/null_allocator.hpp
+        include/sb/segregator_allocator.hpp
         include/sb/singleton_allocator.hpp
         include/sb/stack_allocator.hpp
         include/sb/throw_allocator.hpp)
