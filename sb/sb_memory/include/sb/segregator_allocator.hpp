@@ -44,7 +44,7 @@ namespace sb
                 }
             }
 
-            void deallocate(const mem& m)
+            void deallocate(mem& m)
             {
                 if(m.size() <= threshold) {
                     LowerAllocator::deallocate(m);
