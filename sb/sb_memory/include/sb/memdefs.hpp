@@ -22,8 +22,8 @@
 //// SOFTWARE.
 ////
 
-#ifndef SB_MEMORY_DEFS_HPP
-#   define SB_MEMORY_DEFS_HPP
+#ifndef SB_MEMORY_MEMDEFS_HPP
+#   define SB_MEMORY_MEMDEFS_HPP
 
 #include <cstddef>
 #include <cstdint>

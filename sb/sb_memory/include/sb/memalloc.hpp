@@ -22,8 +22,8 @@
 //// SOFTWARE.
 ////
 
-#ifndef SB_MEMORY_MEMALIGN_HPP
-#	define SB_MEMORY_MEMALIGN_HPP
+#ifndef SB_MEMORY_MEMALLOC_HPP
+#	define SB_MEMORY_MEMALLOC_HPP
 
 #include <memory>
 #include <sb/mem.hpp>

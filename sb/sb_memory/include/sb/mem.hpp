@@ -22,8 +22,8 @@
 //// SOFTWARE.
 ////
 
-#ifndef SB_MEMORY_DATA_HPP
-#	define SB_MEMORY_DATA_HPP
+#ifndef SB_MEMORY_MEM_HPP
+#	define SB_MEMORY_MEM_HPP
 
 #include <utility>
 #include <sb/memdefs.hpp>

@@ -22,8 +22,8 @@
 //// SOFTWARE.
 ////
 
-#ifndef SB_MEMORY_ALIGN_HPP
-#	define SB_MEMORY_ALIGN_HPP
+#ifndef SB_MEMORY_MEMALIGN_HPP
+#	define SB_MEMORY_MEMALIGN_HPP
 
 #include <sb/memdefs.hpp>
 
