@@ -25,7 +25,6 @@
 #ifndef SB_MEMORY_ALIGN_HPP
 #	define SB_MEMORY_ALIGN_HPP
 
-#include <cstddef>
 #include <sb/memdefs.hpp>
 
 namespace sb
