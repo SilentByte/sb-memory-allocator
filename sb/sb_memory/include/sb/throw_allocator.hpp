@@ -35,6 +35,9 @@ namespace sb
     class throw_allocator : public Allocator
     {
         public:
+            constexpr static bool exact_size_allocation = Allocator::exact_size_allocation;
+
+        public:
             mem allocate(memsize size)
             {
                 mem m = Allocator::allocate(size);

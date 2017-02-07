@@ -34,6 +34,9 @@ namespace sb
     class heap_allocator
     {
         public:
+            constexpr static bool exact_size_allocation = true;
+
+        public:
             mem allocate(memsize size) const noexcept
             {
                 if(size == 0) {

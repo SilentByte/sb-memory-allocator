@@ -34,6 +34,10 @@ namespace sb
     class fallback_allocator : private PrimaryAllocator, private SecondaryAllocator
     {
         public:
+            constexpr bool exact_size_allocation = PrimaryAllocator::exact_size_allocation
+                                                   && SecondaryAllocator::exact_size_allocation;
+
+        public:
             mem allocate(memsize size)
             {
                 mem m = Primary::allocate(size);

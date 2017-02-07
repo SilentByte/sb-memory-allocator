@@ -45,6 +45,8 @@ namespace sb
             constexpr static memsize max_size = stack_size;
             constexpr static memsize alignment = stack_alignment;
 
+            constexpr static bool exact_size_allocation = false;
+
         private:
             alignas(stack_alignment) char _buffer[stack_size];
             char* _ptr;
@@ -66,8 +68,9 @@ namespace sb
                 memsize aligned = align(stack_alignment, size);
 
                 // Check if stack memory is exhausted.
-                if(aligned + this->_ptr > this->_buffer + stack_size)
+                if(aligned + this->_ptr > this->_buffer + stack_size) {
                     return {};
+                }
 
                 mem m {this->_ptr, aligned};
                 this->_ptr += aligned;
@@ -83,8 +86,9 @@ namespace sb
 
                 assert(this->owns(m));
 
-                if(this->_ptr == static_cast<char*>(m.ptr()) + m.size())
+                if(this->_ptr == static_cast<char*>(m.ptr()) + m.size()) {
                     this->_ptr = static_cast<char*>(m.ptr());
+                }
 
                 m.clear();
             }

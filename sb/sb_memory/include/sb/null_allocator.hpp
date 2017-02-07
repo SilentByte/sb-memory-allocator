@@ -34,6 +34,11 @@ namespace sb
     class null_allocator
     {
         public:
+            // It can be assumed for convenience that the size would be respected
+            // if the allocation were not to fail.
+            constexpr static bool exact_size_allocation = true;
+
+        public:
             mem allocate(memsize size) const noexcept
             {
                 return {nullptr, 0};

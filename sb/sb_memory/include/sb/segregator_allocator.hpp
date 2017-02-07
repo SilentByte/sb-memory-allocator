@@ -34,6 +34,10 @@ namespace sb
     class segregator_allocator : private LowerAllocator, private UpperAllocator
     {
         public:
+            constexpr static bool exact_size_allocation = LowerAllocator::exact_size_allocation
+                                                          && UpperAllocator::exact_size_allocation;
+
+        public:
             mem allocate(memsize size)
             {
                 if(size <= threshold) {

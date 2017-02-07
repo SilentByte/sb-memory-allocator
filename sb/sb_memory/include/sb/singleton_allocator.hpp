@@ -33,6 +33,9 @@ namespace sb
     class singleton_allocator
     {
         public:
+            constexpr bool exact_size_allocation = Allocator::exactsize_allocation;
+
+        public:
             static Allocator& instance()
             {
                 static Allocator allocator;
