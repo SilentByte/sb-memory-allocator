@@ -100,6 +100,24 @@ namespace sb
             throw;
         }
     }
+
+    template<typename T, typename Allocator, typename ...Args>
+    std::shared_ptr<T> shared_allocate(Allocator& allocator, Args&& ...args)
+    {
+        constexpr sb::memsize type_size = sizeof(T);
+
+        mem buffer = allocator.allocate(type_size);
+        try {
+            T* ptr = new(buffer.ptr()) T(std::forward<Args>(args)...);
+
+            return std::shared_ptr<T>(ptr, default_deallocator<T, Allocator>
+                {allocator, type_size});
+        }
+        catch(...) {
+            allocator.deallocate(buffer);
+            throw;
+        }
+    };
 }
 
 #endif
