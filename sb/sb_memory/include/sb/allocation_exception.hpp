@@ -22,36 +22,33 @@
 //// SOFTWARE.
 ////
 
-#ifndef SB_MEMORY_NULL_ALLOCATOR_HPP
-#	define SB_MEMORY_NULL_ALLOCATOR_HPP
+#ifndef SB_MEMORY_ALLOCATION_EXCEPTION_HPP
+#	define SB_MEMORY_ALLOCATION_EXCEPTION_HPP
 
-#include <cassert>
-#include <sb/mem.hpp>
+#include <stdexcept>
+#include <sstream>
+#include <string>
 #include <sb/memdefs.hpp>
 
 namespace sb
 {
-    class null_allocator
+    class allocation_exception : public std::runtime_error
     {
-        public:
-            // It can be assumed for convenience that the size would be respected
-            // if the allocation were not to fail.
-            constexpr static bool exact_size_allocation = true;
-
-        public:
-            mem allocate(memsize size) const noexcept
+        private:
+            static std::string format_message(memsize size, const char* message)
             {
-                return {nullptr, 0};
+                std::ostringstream ss {""};
+                ss << "(" << size << ") "
+                   << (message != nullptr) ? message : "Failed to allocate memory.";
+
+                return ss.str();
             }
 
-            void deallocate(mem m) const noexcept
+        public:
+            allocation_exception(memsize size, const char* message = nullptr)
+                : std::runtime_error {format_message(size, message)}
             {
-                assert(m.null());
-            }
-
-            bool owns(const mem& m) const noexcept
-            {
-                return m.null();
+                //
             }
     };
 }

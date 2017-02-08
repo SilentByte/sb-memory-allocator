@@ -22,48 +22,64 @@
 //// SOFTWARE.
 ////
 
-#include <sb/data.hpp>
 #include <sb/heap_allocator.hpp>
+
+#include <algorithm>
 #include <gtest/gtest.h>
 
 TEST(SBHeapAllocatorTest, Allocate)
 {
-	std::size_t size = 1024;
-	sb::heap_allocator ha;
+    sb::memsize size = 1024;
+    sb::heap_allocator ha;
 
-	auto d = ha.allocate(size);
+    auto m = ha.allocate(size);
 
-	EXPECT_NE(d.ptr(), nullptr);
-	EXPECT_EQ(d.size(), size);
+    EXPECT_NE(m.ptr(), nullptr);
+    EXPECT_EQ(m.size(), size);
 
-	ha.deallocate(d);
+    ha.deallocate(m);
+}
+
+TEST(SBHeapAllocatorTest, AllocateMultiple)
+{
+    std::vector<sb::memsize> v {1, 2, 3, 4, 5, 8, 13, 16, 20, 24, 1000, 2000, 10000};
+    sb::heap_allocator ha;
+
+    std::for_each(v.begin(), v.end(), [&ha](const sb::memsize& size) {
+        auto m = ha.allocate(size);
+
+        EXPECT_NE(m.ptr(), nullptr);
+        EXPECT_EQ(m.size(), size);
+
+        ha.deallocate(m);
+    });
 }
 
 TEST(SBHeapAllocatorTest, AllocateNull)
 {
-	std::size_t size = 0;
-	sb::heap_allocator ha;
+    sb::memsize size = 0;
+    sb::heap_allocator ha;
 
-	auto d = ha.allocate(size);
+    auto m = ha.allocate(size);
 
-	EXPECT_EQ(d.ptr(), nullptr);
-	EXPECT_EQ(d.size(), 0);
+    EXPECT_EQ(m.ptr(), nullptr);
+    EXPECT_EQ(m.size(), 0);
 
-	ha.deallocate(d);
+    ha.deallocate(m);
 }
 
 TEST(SBHeapAllocatorTest, Deallocate)
 {
-	std::size_t size = 1024;
-	sb::heap_allocator ha;
+    sb::memsize size = 1024;
+    sb::heap_allocator ha;
 
-	auto d = ha.allocate(size);
+    auto m = ha.allocate(size);
 
-	EXPECT_NE(d.ptr(), nullptr);
-	EXPECT_EQ(d.size(), size);
+    EXPECT_NE(m.ptr(), nullptr);
+    EXPECT_EQ(m.size(), size);
 
-	ha.deallocate(d);
+    ha.deallocate(m);
 
-	EXPECT_EQ(d.ptr(), nullptr);
-	EXPECT_EQ(d.size(), 0);
+    EXPECT_EQ(m.ptr(), nullptr);
+    EXPECT_EQ(m.size(), 0);
 }

@@ -22,38 +22,27 @@
 //// SOFTWARE.
 ////
 
-#ifndef SB_MEMORY_NULL_ALLOCATOR_HPP
-#	define SB_MEMORY_NULL_ALLOCATOR_HPP
+#ifndef SB_MEMORY_MEMDEFS_HPP
+#   define SB_MEMORY_MEMDEFS_HPP
 
-#include <cassert>
-#include <sb/mem.hpp>
-#include <sb/memdefs.hpp>
+#include <cstddef>
+#include <cstdint>
 
 namespace sb
 {
-    class null_allocator
-    {
-        public:
-            // It can be assumed for convenience that the size would be respected
-            // if the allocation were not to fail.
-            constexpr static bool exact_size_allocation = true;
+    using memsize = std::size_t;
 
-        public:
-            mem allocate(memsize size) const noexcept
-            {
-                return {nullptr, 0};
-            }
+    using u8 = std::uint8_t;
+    using u16 = std::uint16_t;
+    using u32 = std::uint32_t;
+    using u64 = std::uint64_t;
 
-            void deallocate(mem m) const noexcept
-            {
-                assert(m.null());
-            }
+    using i8 = std::int8_t;
+    using i16 = std::int16_t;
+    using i32 = std::int32_t;
+    using i64 = std::int64_t;
 
-            bool owns(const mem& m) const noexcept
-            {
-                return m.null();
-            }
-    };
+    constexpr memsize default_alignment = sizeof(memsize);
 }
 
 #endif

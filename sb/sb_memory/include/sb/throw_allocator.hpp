@@ -22,36 +22,30 @@
 //// SOFTWARE.
 ////
 
-#ifndef SB_MEMORY_NULL_ALLOCATOR_HPP
-#	define SB_MEMORY_NULL_ALLOCATOR_HPP
+#ifndef SB_MEMORY_THROW_ALLOCATOR_HPP
+#	define SB_MEMORY_THROW_ALLOCATOR_HPP
 
-#include <cassert>
+#include <sb/allocation_exception.hpp>
 #include <sb/mem.hpp>
 #include <sb/memdefs.hpp>
 
 namespace sb
 {
-    class null_allocator
+    template<typename Allocator, typename Exception = sb::allocation_exception>
+    class throw_allocator : public Allocator
     {
         public:
-            // It can be assumed for convenience that the size would be respected
-            // if the allocation were not to fail.
-            constexpr static bool exact_size_allocation = true;
+            constexpr static bool exact_size_allocation = Allocator::exact_size_allocation;
 
         public:
-            mem allocate(memsize size) const noexcept
+            mem allocate(memsize size)
             {
-                return {nullptr, 0};
-            }
+                mem m = Allocator::allocate(size);
+                if(m.valid()) {
+                    return m;
+                }
 
-            void deallocate(mem m) const noexcept
-            {
-                assert(m.null());
-            }
-
-            bool owns(const mem& m) const noexcept
-            {
-                return m.null();
+                throw Exception {size};
             }
     };
 }

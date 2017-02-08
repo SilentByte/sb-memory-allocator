@@ -22,36 +22,52 @@
 //// SOFTWARE.
 ////
 
-#ifndef SB_MEMORY_NULL_ALLOCATOR_HPP
-#	define SB_MEMORY_NULL_ALLOCATOR_HPP
+#ifndef SB_MEMORY_FALLBACK_ALLOCATOR_HPP
+#	define SB_MEMORY_FALLBACK_ALLOCATOR_HPP
 
-#include <cassert>
 #include <sb/mem.hpp>
 #include <sb/memdefs.hpp>
 
 namespace sb
 {
-    class null_allocator
+    template<typename PrimaryAllocator, typename SecondaryAllocator>
+    class fallback_allocator : private PrimaryAllocator, private SecondaryAllocator
     {
         public:
-            // It can be assumed for convenience that the size would be respected
-            // if the allocation were not to fail.
-            constexpr static bool exact_size_allocation = true;
+            constexpr bool exact_size_allocation = PrimaryAllocator::exact_size_allocation
+                                                   && SecondaryAllocator::exact_size_allocation;
 
         public:
-            mem allocate(memsize size) const noexcept
+            mem allocate(memsize size)
             {
-                return {nullptr, 0};
+                mem m = Primary::allocate(size);
+                if(m) {
+                    return m;
+                }
+                else {
+                    return Secondary::allocate(size);
+                }
             }
 
-            void deallocate(mem m) const noexcept
+            void deallocate(const mem& m)
             {
-                assert(m.null());
+                if(Primary::owns(m)) {
+                    Primary::deallocate(m);
+                }
+                else {
+                    Secondary::deallocate(m);
+                }
             }
 
-            bool owns(const mem& m) const noexcept
+            void collect() noexcept
             {
-                return m.null();
+                Primary::collect();
+                Secondary::collect();
+            }
+
+            bool owns(const mem& m) const
+            {
+                return Primary::owns(m) || Secondary::owns(m);
             }
     };
 }

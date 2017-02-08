@@ -22,36 +22,53 @@
 //// SOFTWARE.
 ////
 
-#ifndef SB_MEMORY_NULL_ALLOCATOR_HPP
-#	define SB_MEMORY_NULL_ALLOCATOR_HPP
+#ifndef SB_MEMORY_SEGREGATOR_ALLOCATOR_HPP
+#	define SB_MEMORY_SEGREGATOR_ALLOCATOR_HPP
 
-#include <cassert>
 #include <sb/mem.hpp>
 #include <sb/memdefs.hpp>
 
 namespace sb
 {
-    class null_allocator
+    template<memsize threshold, typename LowerAllocator, typename UpperAllocator>
+    class segregator_allocator : private LowerAllocator, private UpperAllocator
     {
         public:
-            // It can be assumed for convenience that the size would be respected
-            // if the allocation were not to fail.
-            constexpr static bool exact_size_allocation = true;
+            constexpr static bool exact_size_allocation = LowerAllocator::exact_size_allocation
+                                                          && UpperAllocator::exact_size_allocation;
 
         public:
-            mem allocate(memsize size) const noexcept
+            mem allocate(memsize size)
             {
-                return {nullptr, 0};
+                if(size <= threshold) {
+                    return LowerAllocator::allocate(size);
+                }
+                else {
+                    return UpperAllocator::allocate(size);
+                }
             }
 
-            void deallocate(mem m) const noexcept
+            void deallocate(mem& m)
             {
-                assert(m.null());
+                if(m.size() <= threshold) {
+                    LowerAllocator::deallocate(m);
+                }
+                else {
+                    UpperAllocator::deallocate(m);
+                }
             }
 
-            bool owns(const mem& m) const noexcept
+            void collect()
             {
-                return m.null();
+                LowerAllocator::collect();
+                UpperAllocator::collect();
+            }
+
+            bool owns(const mem& m) const
+            {
+                return m.size() <= threshold
+                       ? LowerAllocator::owns(m)
+                       : UpperAllocator::owns(m);
             }
     };
 }

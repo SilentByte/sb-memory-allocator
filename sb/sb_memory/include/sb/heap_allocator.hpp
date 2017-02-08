@@ -25,36 +25,40 @@
 #ifndef SB_MEMORY_HEAP_ALLOCATOR_HPP
 #	define SB_MEMORY_HEAP_ALLOCATOR_HPP
 
-#include <sb/data.hpp>
 #include <cstdlib>
-#include <cstddef>
+#include <sb/mem.hpp>
+#include <sb/memdefs.hpp>
 
 namespace sb
 {
-	class heap_allocator
-	{
-		public:
-			data allocate(std::size_t size)
-			{
-				if(size == 0)
-					return {};
+    class heap_allocator
+    {
+        public:
+            constexpr static bool exact_size_allocation = true;
 
-				void* ptr = malloc(size);
-				if(ptr == nullptr)
-					return {};
+        public:
+            mem allocate(memsize size) const noexcept
+            {
+                if(size == 0) {
+                    return {};
+                }
 
-				return {ptr, size};
-			}
+                void* ptr = malloc(size);
+                if(ptr == nullptr) {
+                    return {};
+                }
 
-			void deallocate(data& d)
-			{
-				if(d)
-				{
-					free(d.ptr());
-					d.clear();
-				}
-			}
-	};
+                return {ptr, size};
+            }
+
+            void deallocate(mem& m) const noexcept
+            {
+                if(m) {
+                    free(m.ptr());
+                    m.clear();
+                }
+            }
+    };
 }
 
 #endif

@@ -22,88 +22,88 @@
 //// SOFTWARE.
 ////
 
-#include <sb/data.hpp>
+#include <sb/mem.hpp>
 #include <gtest/gtest.h>
 
 TEST(SBDataTest, CTor)
 {
-	sb::data d {};
+    sb::mem m {};
 
-	EXPECT_EQ(d.ptr(), nullptr);
-	EXPECT_EQ(d.size(), 0);
+    EXPECT_EQ(m.ptr(), nullptr);
+    EXPECT_EQ(m.size(), 0);
 }
 
 TEST(SBDataTest, CTorValue)
 {
-	void* address = reinterpret_cast<void*>(123456789);
-	std::size_t size = 987654321;
+    void* address = reinterpret_cast<void*>(123456789);
+    sb::memsize size = 987654321;
 
-	sb::data d {address, size};
+    sb::mem m {address, size};
 
-	EXPECT_EQ(d.ptr(), address);
-	EXPECT_EQ(d.size(), size);
+    EXPECT_EQ(m.ptr(), address);
+    EXPECT_EQ(m.size(), size);
 }
 
 TEST(SBDataTest, Valid)
 {
-	EXPECT_FALSE((sb::data{nullptr, 0}).valid());
-	EXPECT_TRUE((sb::data{reinterpret_cast<void*>(123456789), 128}).valid());
+    EXPECT_FALSE((sb::mem{nullptr, 0}).valid());
+    EXPECT_TRUE((sb::mem{reinterpret_cast<void*>(123456789), 128}).valid());
 }
 
 TEST(SBDataTest, Null)
 {
-	EXPECT_TRUE((sb::data{nullptr, 0}).null());
-	EXPECT_FALSE((sb::data{reinterpret_cast<void*>(123456789), 128}).null());
+    EXPECT_TRUE((sb::mem{nullptr, 0}).null());
+    EXPECT_FALSE((sb::mem{reinterpret_cast<void*>(123456789), 128}).null());
 }
 
 TEST(SBDataTest, Clear)
 {
-	void* address = reinterpret_cast<void*>(123456789);
-	std::size_t size = 987654321;
+    void* address = reinterpret_cast<void*>(123456789);
+    sb::memsize size = 987654321;
 
-	sb::data d {address, size};
-	d.clear();
+    sb::mem m {address, size};
+    m.clear();
 
-	EXPECT_EQ(d.ptr(), nullptr);
-	EXPECT_EQ(d.size(), 0);
+    EXPECT_EQ(m.ptr(), nullptr);
+    EXPECT_EQ(m.size(), 0);
 }
 
 TEST(SBDataTest, BoolCompare)
 {
-	void* address = reinterpret_cast<void*>(123456789);
-	std::size_t size = 987654321;
+    void* address = reinterpret_cast<void*>(123456789);
+    sb::memsize size = 987654321;
 
-	sb::data d1 {address, size};
-	if(!d1)
-		ADD_FAILURE();
+    sb::mem m1 {address, size};
+    if(!m1)
+        ADD_FAILURE();
 
-	sb::data d2 {};
-	if(d2)
-		ADD_FAILURE();
+    sb::mem m2 {};
+    if(m2)
+        ADD_FAILURE();
 }
 
 TEST(SBDataTest, Equals)
 {
-	void* address = reinterpret_cast<void*>(123456789);
-	std::size_t size = 987654321;
+    void* address = reinterpret_cast<void*>(123456789);
+    sb::memsize size = 987654321;
 
-	sb::data d1 {address, size};
-	sb::data d2 {address, size};
-	sb::data d3 {};
+    sb::mem m1 {address, size};
+    sb::mem m2 {address, size};
+    sb::mem m3 {};
 
-	EXPECT_EQ(d1, d2);
-	EXPECT_NE(d1, d3);
+    EXPECT_EQ(m1, m2);
+    EXPECT_NE(m1, m3);
 }
 
 TEST(SBDataTest, Empty)
 {
-	void* address = reinterpret_cast<void*>(123456789);
-	std::size_t size = 987654321;
+    void* address = reinterpret_cast<void*>(123456789);
+    sb::memsize size = 987654321;
 
-	sb::data d1 {};
-	sb::data d2 {};
-	sb::data d3 {address, size};
+    sb::mem m1 {};
+    sb::mem m2 {};
+    sb::mem m3 {address, size};
 
-	ASSERT_EQ(d1, d2);
-	ASSERT_NE(d1, d3);
+    ASSERT_EQ(m1, m2);
+    ASSERT_NE(m1, m3);
 }

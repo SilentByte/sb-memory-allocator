@@ -22,38 +22,34 @@
 //// SOFTWARE.
 ////
 
-#ifndef SB_MEMORY_NULL_ALLOCATOR_HPP
-#	define SB_MEMORY_NULL_ALLOCATOR_HPP
+#include <sb/throw_allocator.hpp>
 
-#include <cassert>
-#include <sb/mem.hpp>
-#include <sb/memdefs.hpp>
+#include <gtest/gtest.h>
+#include <sb/stack_allocator.hpp>
 
-namespace sb
+class custom_exception
 {
-    class null_allocator
-    {
-        public:
-            // It can be assumed for convenience that the size would be respected
-            // if the allocation were not to fail.
-            constexpr static bool exact_size_allocation = true;
+    public:
+        custom_exception(sb::memsize size)
+        {
+            //
+        }
+};
 
-        public:
-            mem allocate(memsize size) const noexcept
-            {
-                return {nullptr, 0};
-            }
-
-            void deallocate(mem m) const noexcept
-            {
-                assert(m.null());
-            }
-
-            bool owns(const mem& m) const noexcept
-            {
-                return m.null();
-            }
-    };
+TEST(SBThrowAllocatorTest, AllocateThrow)
+{
+    sb::throw_allocator<sb::stack_allocator<100>> a;
+    EXPECT_THROW(a.allocate(200), sb::allocation_exception);
 }
 
-#endif
+TEST(SBThrowAllocatorTest, AllocateThrowCustom)
+{
+    sb::throw_allocator<sb::stack_allocator<100>, custom_exception> a;
+    EXPECT_THROW(a.allocate(200), custom_exception);
+}
+
+TEST(SBThrowAllocatorTest, AllocateNoThrow)
+{
+    sb::throw_allocator<sb::stack_allocator<100>> a;
+    EXPECT_NO_THROW(a.allocate(50));
+}
